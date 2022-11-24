@@ -1,0 +1,9 @@
+GET localhost:8080/api/company
+
+###
+POST localhost:8080/api/company
+Content-Type: application/json
+
+{
+  "name": "eleks"
+}
