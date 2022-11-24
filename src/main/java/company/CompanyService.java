@@ -16,7 +16,7 @@ public class CompanyService {
 
 
 //    to change
-    public List<Company> getCompany() {
+    public List<Company> getCompany(String domen) {
         return companyRepository.findAll();
     }
 
