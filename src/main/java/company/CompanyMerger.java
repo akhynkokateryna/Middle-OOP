@@ -30,7 +30,7 @@ public class CompanyMerger {
                 try {
                     String attributeValue = String.valueOf(yo.get(toScrape.get(i)));
                     Object attributeName = yo.getName();
-                    if (!attributeValue.equals(null) && !valuesScraped.get(attributeName).contains(attributeValue)) {
+                    if (!attributeValue.equals("null") && !valuesScraped.get(attributeName).contains(attributeValue)) {
                         valuesScraped.get(attributeName).add(attributeValue);
                     }
                 }

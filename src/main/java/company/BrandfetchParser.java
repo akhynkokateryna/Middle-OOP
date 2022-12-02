@@ -7,9 +7,9 @@ import lombok.SneakyThrows;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class BrandfetchParser {
+public class BrandfetchParser implements Parser{
     @SneakyThrows
-    Company getData(String domain){
+    public Company getData(String domain){
 
         Company company = new Company();
             if(domain.startsWith("https://")) {domain.replace("https://", "");}

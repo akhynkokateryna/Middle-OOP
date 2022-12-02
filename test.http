@@ -1,5 +1,6 @@
-#GET localhost:8080/api/company/facebook.com
-GET peaceful-woodland-36950.herokuapp.com/api/company/eleks.com
+GET localhost:8080/api/company/all
+
+#GET peaceful-woodland-36950.herokuapp.com/api/company/eleks.com
 
 ###
 POST localhost:8080/api/company
