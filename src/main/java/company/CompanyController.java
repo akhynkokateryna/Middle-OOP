@@ -3,7 +3,9 @@ package company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CompanyController {
@@ -14,12 +16,17 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
+    @RequestMapping(path = "/api/company")
+    public List<Company> getCompanies() {
+        return companyService.getCompanies();
+    }
+
     @RequestMapping(path = "/api/company/{domen}")
-    public List<Company> getCompany(@PathVariable("domen") String domen) {
+    public Optional<Company> getCompany(@PathVariable("domen") String domen) {
         return companyService.getCompany(domen);
     }
 
-    @PostMapping(path = "/api/company")
+    @PostMapping()
     public void addCompany(@RequestBody Company company) {
         companyService.addCompany(company);
     }
