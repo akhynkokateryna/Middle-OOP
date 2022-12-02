@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -16,17 +15,20 @@ public class CompanyService {
     }
 
 
-    public Optional<Company> getCompany(String domen) {
-        return companyRepository.findAppUserByName(domen);
+    public List<Company> getCompany(String domain) {
+        if (domain.equals("all")) {
+            return companyRepository.findAll();
+        } else {
+            return companyRepository.findCompanyByDomain(domain);
+        }
     }
 
 
-//    to change
     public void addCompany(Company company) {
+        List<Company> neededCompany = companyRepository.findCompanyByDomain(company.getDomain());
+        if (!neededCompany.isEmpty()) {
+            companyRepository.deleteById(neededCompany.get(0).getId());
+        }
         companyRepository.save(company);
-    }
-
-    public List<Company> getCompanies() {
-        return companyRepository.findAll();
     }
 }

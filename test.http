@@ -1,5 +1,5 @@
 GET localhost:8080/api/company/softserve
-#GET peaceful-woodland-36950.herokuapp.com/api/company/softserve
+#GET peaceful-woodland-36950.herokuapp.com/api/company/eleks.com
 
 ###
 POST localhost:8080/api/company
@@ -7,7 +7,19 @@ Content-Type: application/json
 
 {
   "name": "eleks",
-  "employees": "5000"
+  "employees": "5000",
+  "domain": "eleks.com"
+}
+
+
+###
+POST localhost:8080/api/company
+Content-Type: application/json
+
+{
+  "name": "softerve",
+  "employees": "10000",
+  "domain": "softserveinc.com"
 }
 
 
@@ -16,5 +28,6 @@ POST peaceful-woodland-36950.herokuapp.com/api/company
 Content-Type: application/json
 
 {
-  "name": "softserve"
+  "name": "eleks",
+  "domain": "eleks.com"
 }

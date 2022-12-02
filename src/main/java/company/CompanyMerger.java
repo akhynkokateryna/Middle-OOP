@@ -24,7 +24,7 @@ public class CompanyMerger {
 
         HashMap<String, List<String>> valuesScraped = new HashMap<String, List<String>>();
 
-        String[] tokenList = {"name", "twitter", "facebook", "logo", "icon", "employees", "address"};
+        String[] tokenList = {"name", "domain", "twitter", "facebook", "logo", "icon", "employees", "address"};
 
         for (String token:
              tokenList) {

@@ -22,6 +22,7 @@ public class Company {
     @Column(unique = true)  //maybe will be needed
     private String name;
 
+    private String domain;
     private String twitter;
     private String facebook;
     private String logo;
