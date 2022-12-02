@@ -28,4 +28,18 @@ public class Company {
     private String icon;
     private String employees;
     private String address;
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", twitter='" + twitter + '\'' +
+                ", facebook='" + facebook + '\'' +
+                ", logo='" + logo + '\'' +
+                ", icon='" + icon + '\'' +
+                ", employees='" + employees + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }
