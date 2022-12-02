@@ -1,8 +1,9 @@
-package company;
+package parsers;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import company.Company;
 import lombok.SneakyThrows;
 import org.json.JSONArray;
 import org.json.JSONObject;

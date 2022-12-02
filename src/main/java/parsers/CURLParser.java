@@ -1,5 +1,6 @@
-package company;
+package parsers;
 
+import company.Company;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

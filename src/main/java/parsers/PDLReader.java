@@ -1,10 +1,9 @@
-package company;
+package parsers;
 
 import company.Company;
 import lombok.SneakyThrows;
-import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;

@@ -1,11 +1,12 @@
 package company;
 
-import lombok.SneakyThrows;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import parsers.BrandfetchParser;
+import parsers.CURLParser;
+import parsers.PDLReader;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class CompanyService {
     }
 
 
-    public List<Company> getCompany(String domain) throws IOException {
+    public List<Company> getCompany(String domain){
         if (domain.equals("all")) {
             return companyRepository.findAll();
         }
