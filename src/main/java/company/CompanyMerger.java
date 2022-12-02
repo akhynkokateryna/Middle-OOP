@@ -10,21 +10,13 @@ import java.util.List;
 
 
 public class CompanyMerger {
-    CompanyMerger instance = null;
-
-    private CompanyMerger getInstance() {
-        if (instance == null) {
-            return new CompanyMerger();
-        }
-        return instance;
-    }
 
     public JSONObject mergeIntoJSON(List<Company> toScrape) {
         JSONObject output = new JSONObject();
 
         HashMap<String, List<String>> valuesScraped = new HashMap<String, List<String>>();
 
-        String[] tokenList = {"name", "domain", "twitter", "facebook", "logo", "icon", "employees", "address"};
+        String[] tokenList = {"domain", "name", "domain", "twitter", "facebook", "logo", "icon", "employees", "address"};
 
         for (String token:
              tokenList) {
@@ -38,7 +30,7 @@ public class CompanyMerger {
                 try {
                     String attributeValue = String.valueOf(yo.get(toScrape.get(i)));
                     Object attributeName = yo.getName();
-                    if (!valuesScraped.get(attributeName).contains(attributeValue) && !attributeValue.equals("null")) {
+                    if (!attributeValue.equals(null) && !valuesScraped.get(attributeName).contains(attributeValue)) {
                         valuesScraped.get(attributeName).add(attributeValue);
                     }
                 }
@@ -47,6 +39,9 @@ public class CompanyMerger {
                 }
                 catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
+                }
+                catch (NullPointerException e) {
+
                 }
             }
         }

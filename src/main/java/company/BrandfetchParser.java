@@ -21,6 +21,7 @@ public class BrandfetchParser {
                 .addHeader("Authorization", "Bearer dmNkRe6Qk/Hbyq6WGBfoYL2kkGh0r3nlClHhIaZLR7k=")
                 .get()
                 .build();
+//        System.out.println("https://api.brandfetch.io/v2/brands/"+domain);
         Response response = client.newCall(request).execute();
 
         String jsonString = response.body().string();
@@ -43,7 +44,7 @@ public class BrandfetchParser {
         JSONArray logos = obj.getJSONArray("logos");
         JSONArray formats;
         for (int i = 0; i < logos.length(); i++) {
-            System.out.println(logos.getJSONObject(i).toString());
+//            System.out.println(logos.getJSONObject(i).toString());
             if(logos.getJSONObject(i).getString("type").equals("icon")) {
                 formats = logos.getJSONObject(i).getJSONArray("formats");
                 company.setIcon(formats.getJSONObject(0).getString("src"));
@@ -54,6 +55,7 @@ public class BrandfetchParser {
                 company.setLogo(formats.getJSONObject(0).getString("src"));
             }
         }
+        company.setDomain(domain);
         return company;
     }
 }

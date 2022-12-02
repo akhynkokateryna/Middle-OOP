@@ -1,14 +1,14 @@
-GET localhost:8080/api/company/softserve
-#GET peaceful-woodland-36950.herokuapp.com/api/company/eleks.com
+#GET localhost:8080/api/company/facebook.com
+GET peaceful-woodland-36950.herokuapp.com/api/company/eleks.com
 
 ###
 POST localhost:8080/api/company
 Content-Type: application/json
 
 {
-  "name": "eleks",
+  "name": "zara",
   "employees": "5000",
-  "domain": "eleks.com"
+  "domain": "zara.com"
 }
 
 

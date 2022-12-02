@@ -1,9 +1,6 @@
 package company;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,22 +10,22 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table
 @Entity
-
+@Builder
 public class Company {
     @Id
     @GeneratedValue
-    private int id;
+    public int id;
 
     @Column(unique = true)  //maybe will be needed
-    private String name;
+    public String name;
 
-    private String domain;
-    private String twitter;
-    private String facebook;
-    private String logo;
-    private String icon;
-    private String employees;
-    private String address;
+    public String domain;
+    public String twitter;
+    public String facebook;
+    public String logo;
+    public String icon;
+    public String employees;
+    public String address;
 
     @Override
     public String toString() {
