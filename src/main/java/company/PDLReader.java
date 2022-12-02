@@ -1,4 +1,4 @@
-package finder;
+package company;
 
 import company.Company;
 import org.json.JSONException;

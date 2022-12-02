@@ -1,5 +1,6 @@
 package company;
 
+import lombok.SneakyThrows;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class CompanyService {
     }
 
 
+    @SneakyThrows
     public List<Company> getCompany(String domain) {
         if (domain.equals("all")) {
             return companyRepository.findAll();
@@ -43,6 +45,8 @@ public class CompanyService {
                 .icon(jsonObject.getString("icon"))
                 .logo(jsonObject.getString("logo"))
                 .build();
+        PDLReader pdlReader = new PDLReader();
+        pdlReader.getData(domain, res_company);
         companyRepository.save(res_company);
         return List.of(res_company);
     }
