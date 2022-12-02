@@ -36,7 +36,7 @@ public class CompanyService {
         List<Company> companies = new ArrayList<>();
         companies.add(brandfetchParser.getData(domain));
         companies.add(pdlReader.getData(domain));
-        companies.add(curlParser.getCURLedObject(domain));
+        companies.add(curlParser.getData(domain));
 
         JSONObject jsonObject = companyMerger.mergeIntoJSON(companies);
         Company res_company =  Company.builder()
@@ -62,30 +62,4 @@ public class CompanyService {
         }
         companyRepository.save(company);
     }
-
-//    @SneakyThrows
-//    public static void main(String[] args) {
-//        String domain = "ucu.edu.ua";
-//        BrandfetchParser brandfetchParser = new BrandfetchParser();
-//        PDLReader pdlReader = new PDLReader();
-//        CompanyMerger companyMerger = new CompanyMerger();
-//
-//        List<Company> companies = new ArrayList<>();
-//        companies.add(brandfetchParser.getData(domain));
-//        companies.add(pdlReader.getData(domain));
-//
-//        JSONObject jsonObject = companyMerger.mergeIntoJSON(companies);
-//        Company res_company =  Company.builder()
-//                .domain(jsonObject.getString("domain"))
-//                .name(jsonObject.getString("name"))
-//                .address(jsonObject.getString("address"))
-//                .facebook(jsonObject.getString("facebook"))
-//                .twitter(jsonObject.getString("twitter"))
-//                .employees(jsonObject.getString("employees"))
-//                .icon(jsonObject.getString("icon"))
-//                .logo(jsonObject.getString("logo"))
-//                .build();
-//        System.out.println(res_company);
-//
-//    }
 }

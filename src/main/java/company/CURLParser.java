@@ -12,10 +12,9 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CURLParser {
+public class CURLParser implements Parser{
     private Document html;
 
-    @SneakyThrows
     private void fillHTML(String domain) throws IOException {
         String[] command = {"curl", "--location", "--request", "GET", "https://" + domain};
         Process process = Runtime.getRuntime().exec(command);
@@ -27,6 +26,7 @@ public class CURLParser {
             buff.append(inputLine);
         }
 
+
         String strHTML = buff.toString();
         html = Jsoup.parse(strHTML);
     }
@@ -35,9 +35,8 @@ public class CURLParser {
         return html.title();
     }
 
-    @SneakyThrows
     private String getLocationByCurl() throws IOException {
-        fillHTML("en.wikipedia.org/wiki/" + getTitleByCurl().replace(" ", "_"));
+        fillHTML("en.wikipedia.org/wiki/" + getTitleByCurl());
         Elements infoTable = html.getElementsByClass("infobox");
         Elements details = null;
 
@@ -52,19 +51,23 @@ public class CURLParser {
                         "locality")).replace("\n", "").replace("\r", ""));
                 matcher.find();
 
-                String aLink = matcher.group();
-                pattern = Pattern.compile(">.*<");
-                matcher = pattern.matcher(aLink);
-                matcher.find();
-                String address = matcher.group();
-                return address.substring(1, address.length()-1);
+                try {
+                    String aLink = matcher.group();
+                    pattern = Pattern.compile(">.*<");
+                    matcher = pattern.matcher(aLink);
+                    matcher.find();
+                    String address = matcher.group();
+                    return address.substring(1, address.length() - 1);
+                } catch (IllegalStateException e) {
+                    return "";
+                }
             }
         }
         return "";
     }
 
     @SneakyThrows
-    public Company getCURLedObject(String domain) throws IOException {
+    public Company getData(String domain) {
         CURLParser parser = new CURLParser();
         parser.fillHTML(domain);
         String title = parser.getTitleByCurl();
