@@ -19,7 +19,7 @@ public class CompanyService {
     }
 
 
-    public List<Company> getCompany(String domain) throws IOException {
+    public List<Company> getCompany(String domain) {
         if (domain.equals("all")) {
             return companyRepository.findAll();
         }
@@ -30,13 +30,13 @@ public class CompanyService {
 
         BrandfetchParser brandfetchParser = new BrandfetchParser();
         PDLReader pdlReader = new PDLReader();
-        CURLParser curlParser = new CURLParser();
+//        CURLParser curlParser = new CURLParser();
         CompanyMerger companyMerger = new CompanyMerger();
 
         List<Company> companies = new ArrayList<>();
         companies.add(brandfetchParser.getData(domain));
         companies.add(pdlReader.getData(domain));
-        companies.add(curlParser.getCURLedObject(domain));
+//        companies.add(curlParser.getCURLedObject(domain));
 
         JSONObject jsonObject = companyMerger.mergeIntoJSON(companies);
         Company res_company =  Company.builder()
@@ -65,14 +65,16 @@ public class CompanyService {
 
 //    @SneakyThrows
 //    public static void main(String[] args) {
-//        String domain = "ucu.edu.ua";
+//        String domain = "eleks.com";
 //        BrandfetchParser brandfetchParser = new BrandfetchParser();
 //        PDLReader pdlReader = new PDLReader();
+//        CURLParser curlParser = new CURLParser();
 //        CompanyMerger companyMerger = new CompanyMerger();
 //
 //        List<Company> companies = new ArrayList<>();
 //        companies.add(brandfetchParser.getData(domain));
 //        companies.add(pdlReader.getData(domain));
+//        companies.add(curlParser.getCURLedObject(domain));
 //
 //        JSONObject jsonObject = companyMerger.mergeIntoJSON(companies);
 //        Company res_company =  Company.builder()
