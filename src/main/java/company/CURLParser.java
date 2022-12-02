@@ -1,5 +1,6 @@
 package company;
 
+import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,6 +15,7 @@ import java.util.regex.Pattern;
 public class CURLParser {
     private Document html;
 
+    @SneakyThrows
     private void fillHTML(String domain) throws IOException {
         String[] command = {"curl", "--location", "--request", "GET", "https://" + domain};
         Process process = Runtime.getRuntime().exec(command);
@@ -33,6 +35,7 @@ public class CURLParser {
         return html.title();
     }
 
+    @SneakyThrows
     private String getLocationByCurl() throws IOException {
         fillHTML("en.wikipedia.org/wiki/" + getTitleByCurl().replace(" ", "_"));
         Elements infoTable = html.getElementsByClass("infobox");
@@ -60,6 +63,7 @@ public class CURLParser {
         return "";
     }
 
+    @SneakyThrows
     public Company getCURLedObject(String domain) throws IOException {
         CURLParser parser = new CURLParser();
         parser.fillHTML(domain);

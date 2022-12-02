@@ -1,8 +1,10 @@
 package company;
 
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -15,6 +17,7 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
+    @SneakyThrows
     @RequestMapping(path = "/api/company/{domain}")
     public List<Company> getCompany(@PathVariable("domain") String domain) {
         return companyService.getCompany(domain);

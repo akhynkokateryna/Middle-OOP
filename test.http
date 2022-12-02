@@ -1,4 +1,4 @@
-GET localhost:8080/api/company/all
+GET localhost:8080/api/company/youtube.com
 
 #GET peaceful-woodland-36950.herokuapp.com/api/company/eleks.com
 

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class CompanyService {
     }
 
 
-    public List<Company> getCompany(String domain) {
+    public List<Company> getCompany(String domain) throws IOException {
         if (domain.equals("all")) {
             return companyRepository.findAll();
         }
@@ -29,11 +30,13 @@ public class CompanyService {
 
         BrandfetchParser brandfetchParser = new BrandfetchParser();
         PDLReader pdlReader = new PDLReader();
+        CURLParser curlParser = new CURLParser();
         CompanyMerger companyMerger = new CompanyMerger();
 
         List<Company> companies = new ArrayList<>();
         companies.add(brandfetchParser.getData(domain));
         companies.add(pdlReader.getData(domain));
+        companies.add(curlParser.getCURLedObject(domain));
 
         JSONObject jsonObject = companyMerger.mergeIntoJSON(companies);
         Company res_company =  Company.builder()
