@@ -2,8 +2,10 @@ package parsers;
 
 import company.Company;
 import lombok.SneakyThrows;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -20,21 +22,25 @@ public class PDLReader implements Parser{
         connection.setRequestMethod("GET");
         connection.setRequestProperty("X-Api-Key", API_KEY);
         connection.connect();
-        String text = new Scanner(connection.getInputStream()).useDelimiter("\\Z").next();
-        JSONObject jsonObject = new JSONObject(text);
-        if(!jsonObject.getJSONArray("data").getJSONObject(0).isNull("name"))
-            company.setName(jsonObject.getJSONArray("data").getJSONObject(0).getString("name"));
-        if(!jsonObject.getJSONArray("data").getJSONObject(0).isNull("facebook_url"))
-            company.setFacebook(jsonObject.getJSONArray("data").getJSONObject(0).getString("facebook_url"));
-        if(!jsonObject.getJSONArray("data").getJSONObject(0).isNull("twitter_url"))
-            company.setTwitter(jsonObject.getJSONArray("data").getJSONObject(0).getString("twitter_url"));
-        if(!jsonObject.getJSONArray("data").getJSONObject(0).isNull("size"))
-            company.setEmployees(jsonObject.getJSONArray("data").getJSONObject(0).getString("size"));
-        if(!jsonObject.getJSONArray("data").getJSONObject(0).isNull("location") &&
-                !jsonObject.getJSONArray("data").getJSONObject(0).getJSONObject("location").isNull("streer_address")) {
-            company.setAddress(jsonObject.getJSONArray("data").getJSONObject(0).
-                    getJSONObject("location").getString("street_address"));
+        try {
+            String text = new Scanner(connection.getInputStream()).useDelimiter("\\Z").next();
+            JSONObject jsonObject = new JSONObject(text);
+            if (!jsonObject.getJSONArray("data").getJSONObject(0).isNull("name"))
+                company.setName(jsonObject.getJSONArray("data").getJSONObject(0).getString("name"));
+            if (!jsonObject.getJSONArray("data").getJSONObject(0).isNull("facebook_url"))
+                company.setFacebook(jsonObject.getJSONArray("data").getJSONObject(0).getString("facebook_url"));
+            if (!jsonObject.getJSONArray("data").getJSONObject(0).isNull("twitter_url"))
+                company.setTwitter(jsonObject.getJSONArray("data").getJSONObject(0).getString("twitter_url"));
+            if (!jsonObject.getJSONArray("data").getJSONObject(0).isNull("size"))
+                company.setEmployees(jsonObject.getJSONArray("data").getJSONObject(0).getString("size"));
+            if (!jsonObject.getJSONArray("data").getJSONObject(0).isNull("location") &&
+                    !jsonObject.getJSONArray("data").getJSONObject(0).getJSONObject("location").isNull("streer_address")) {
+                company.setAddress(jsonObject.getJSONArray("data").getJSONObject(0).
+                        getJSONObject("location").getString("street_address"));
+            }
+            return company;
+        } catch (IOException e) {
+            return company;
         }
-        return company;
     }
 }
